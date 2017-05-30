@@ -2,10 +2,27 @@ import React from 'react';
 
 // 컴포넌트의 첫 문자를 대문자로 하는건 React의 naming convention 입니다.
 class App extends React.Component {
+    
+    sayHey(){
+       alert("hey");
+    }
+    
     render(){
-        return (
-         <h1>Hello React Skeleton</h1>
-        );
+        let text = "Dev-Server";
+
+        let pStyle = {
+            color: 'aqua',
+            backgroundColor: 'black'
+        };
+
+        return  (
+            <div>
+                <h1> Hello Velopert </h1>
+                <h2> Welcome to {text}</h2>
+                <button onClick= {this.sayHey}>Click Me</button>
+                <p style = {pStyle}>{1 == 1 ? 'True' : 'False'}</p>
+            </div>
+        )   
     }
 }
 export default App;
