@@ -249,6 +249,32 @@ export default Content;
 ```
 body는 .isRequired 를 추가하여 필수 props 로 설정하였습니다.
 
+
+#### propTypes 사용법이 react v15.5.0에서 변경됨 
+```javascript
+import React from 'react';
+import PropTypes from 'prop-types';
+
+class Content extends React.Component {
+  render() {
+    return (
+      <div>
+        <h2>{this.props.title}</h2>
+        <p> {this.props.body}</p>
+      </div>
+    )
+  }
+}
+
+Content.propType = {
+  title : PropTypes.string,
+  body : PropTypes.string.isRequired
+}
+
+export default Content;
+```
+
+
 #### propTypes 예제들
 ```javascript
 import React from 'react';

@@ -52,11 +52,13 @@ Content.propTypes = {
     requiredAny: React.PropTypes.any.isRequired,
 
     // custom validator
+    
     customProp: function(props, propName, componentName) {
       if (!/matchme/.test(props[propName])) {
         return new Error('Validation failed!');
       }
     }
+    
 };
 /* ... */
 
