@@ -95,4 +95,54 @@ React JSX 는 XML-like Syntax 를 native Javascript로 변환해줍니다.  따�
 ```
 - JSX 안에서 주석을 작성할 때엔, 위 형식으로 작성하면 됩니다. 여기에 작성된 주석은 브라우저상 source 에서 나타나지 않습니다.
 
-## Component
+## Component 생성 및 모듈화
+- 하나의 js 파일안에 여러개의 컴포넌트를 만들수 있지만 유지보수가 좋지 않아서 js파일을 나누어서 관리하는게 좋습니다.
+```javascript
+// Header.js
+import React from 'react';
+
+class Header extends React.Component {
+  render(){
+    return (
+      <h1>Header</h1>      
+    );
+  }
+}
+
+export default Header;
+// Content.js
+import React from 'react';
+
+class Content extends React.Component {
+  render() {
+    return (
+      <div>
+        <h2>Content</h2>
+        <p> Hey !</p>
+      </div>
+    )
+  }
+}
+
+export default Content;
+
+// App.js
+import React from 'react';
+import Header from './Header';
+import Content from './Content';
+
+class App extends React.Component {
+    render(){
+        return  (
+            <div>
+                <Header/>
+                <Content/>
+            </div>
+        );
+    }
+}
+
+export default App;
+
+```
+
