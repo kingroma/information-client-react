@@ -381,4 +381,4 @@ export default StateExample;
 
 ##### props 와 state, 생긴건 비슷하지만 용도는 다릅니다. 헷갈리지 않도록 다음 특성을 기억하세요.
 - parent 컴포넌트에 의해 값이 변경 될 수 있는가? 예(props) 아니오(state) 
-컴포넌트 내부에서 변경 될 수 있는가? 아니오(props) 예(state) 
+- 컴포넌트 내부에서 변경 될 수 있는가? 아니오(props) 예(state) 
