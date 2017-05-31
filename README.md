@@ -146,3 +146,173 @@ export default App;
 
 ```
 
+## props
+컴포넌트에서 변동되지 않는(immutable) 데이터를 사용할때는 prpos를 사용한다. parent 컴포넌트에서 child 컴포넌트로 데이터를 전달할때 사용됩니다.
+```javascript
+// Header.js
+import React from 'react';
+
+class Header extends React.Component {
+  render(){
+    return (
+      <h1>{this.props.title}</h1>      
+    );
+  }
+}
+
+export default Header;
+
+// App.js
+import React from 'react';
+import Header from './Header';
+import Content from './Content';
+
+// 컴포넌트의 첫 문자를 대문자로 하는건 React의 naming convention 입니다.
+class App extends React.Component {  
+    render(){      
+        return  (
+            <div>
+                <Header title={this.props.headerTitle} />
+                <Content title={this.props.contentTitle}
+                         body={this.props.contentBody}/>
+                
+            </div>
+        )   
+    }
+}
+export default App;
+
+// index.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './components/App';
+
+const rootElement = document.getElementById('root');
+ReactDOM.render(<App headerTitle="Welcome !"
+                     contentTitle="Stranger !"
+                     contentBody="Welcomde to exapmle app"/>, rootElement);
+
+```
+
+### 디폴트 props 설정
+- 기본값을 설정 할 땐, 컴포넌트 클래스 하단에 className.defaultProps = { propName: value } 를 삽입하면 됩니다.
+```javascript
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Header from './Header';
+import Content from './Content';
+
+class App extends React.Component {
+    render(){
+        return  (
+            <div>
+                <Header title={ this.props.headerTitle }/>
+                <Content title={ this.props.contentTitle }
+                          body={ this.props.contentBody }/>
+            </div>
+        );
+    }
+}
+
+App.defaultProps = {
+    headerTitle: 'Default header',
+    contentTitle: 'Default contentTitle',
+    contentBody: 'Default contentBody'
+};
+
+export default App;
+```
+### Type검증(Validate)
+ - 컴포넌트 에서 원하는 props 의 Type 과 전달 된 props 의 Type 이 일치하지 않을 때 콘솔에서 오류 메시지가 나타나게 하고 싶을 땐, 컴포넌트 클래스의 propTypes 객체를 설정하면 됩니다. 또한, 이를 통하여 필수 props 를 지정할 수 있습니다. 즉, props 를 지정하지 않으면 콘솔에 오류 메시지가 나타납니다.
+
+```javascript
+import React from 'react';
+ 
+
+class Content extends React.Component {
+    render(){
+        return (
+            <div>
+                <h2>{ this.props.title }</h2>
+                <p> { this.props.body } </p>
+            </div>
+        );
+    }
+}
+
+Content.propTypes = {
+    title: React.PropTypes.string,
+    body: React.PropTypes.string.isRequired
+};
+
+export default Content;
+```
+body는 .isRequired 를 추가하여 필수 props 로 설정하였습니다.
+
+#### propTypes 예제들
+```javascript
+import React from 'react';
+
+
+class ValidationExample extends React.Component {
+    /* ... */
+}
+
+Content.propTypes = {
+
+    // JS primitive types
+    optionalArray: React.PropTypes.array,
+    optionalBool: React.PropTypes.bool,
+    optionalFunc: React.PropTypes.func,
+    optionalNumber: React.PropTypes.number,
+    optionalObject: React.PropTypes.object,
+    optionalString: React.PropTypes.string,
+
+    // anything that can be rendered ( numbers, string, elements, array, fragment)
+    optionalNode: React.PropTypes.node,
+
+    // React element
+    optionalElement: React.PropTyps.element,
+
+    // instance of specific class
+    optionalMessage: React.PropTypes.instanceOf(Message),
+
+    // limited to specific values
+    optionalEnum: React.PropTypes.oneOf(['News', 'Photos']),
+
+    // one of many types
+    optionalUnion: React.PropTypes.oneOfType([
+        React.PropTypes.string,
+        React.propTypes.number
+    ]),
+
+    // array of specific type
+    optionalArrayOf: React.PropTypes.arrayOf(React.PropTypes.number),
+
+    // object with property values of a certain type
+    optionalObjectOf: React.PropTypes.objectOf(React.PropTypes.number),
+
+    // object with particular shape
+    optionalObjectWithShape: React.PropTypes.shape({
+        color: React.PropTypes.string,
+        fontSize: React.PropTypes.number
+    }),
+
+    // Required function
+    requiredFunc: React.PropTypes.func.isRequired,
+
+    // Required prop with any data type
+    requiredAny: React.PropTypes.any.isRequired,
+
+    // custom validator
+    customProp: function(props, propName, componentName) {
+      if (!/matchme/.test(props[propName])) {
+        return new Error('Validation failed!');
+      }
+    }
+};
+/* ... */
+
+export default ValidationExample;
+
+```
