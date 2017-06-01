@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './Header';
 import Content from './Content';
 import RandomNumber from './RandomNumber';
+import Contacts from './Contacts';
 
 // 컴포넌트의 첫 문자를 대문자로 하는건 React의 naming convention 입니다.
 class App extends React.Component {  
@@ -26,6 +27,8 @@ class App extends React.Component {
                          body={this.props.contentBody}/>
                 <RandomNumber number={this.state.value}
                               onUpdate={this.updateValue}  />
+
+                <Contacts />              
             </div>
         )   
     }

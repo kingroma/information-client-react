@@ -382,3 +382,29 @@ export default StateExample;
 ##### props 와 state, 생긴건 비슷하지만 용도는 다릅니다. 헷갈리지 않도록 다음 특성을 기억하세요.
 - parent 컴포넌트에 의해 값이 변경 될 수 있는가? 예(props) 아니오(state) 
 - 컴포넌트 내부에서 변경 될 수 있는가? 아니오(props) 예(state) 
+
+## Array.prototype.map
+map() 메소드는 파라미터로 전달 된 함수를 통하여 배열 내의 각 요소를 프로세싱 하여 그 결과로 새로운 배열을 생성합니다
+```javascript
+arr.map(callback, [thisArg])
+```
+파라미터 <br/>
+callback 새로운 배열의 요소를 생성하는 함수로서, 다음 세가지 인수를 가집니다.
+- currentValue 현재 처리되고 있는 요소
+- index 현재 처리되고 있는 요소의 index 값
+- array 메소드가 불려진 배열
+thisArg (선택항목) callback 함수 내부에서 사용 할 this 값을 설정
+
+예제
+```javascript
+var numbers = [1, 2, 3, 4, 5];
+var processed = numbers.map(function(num){
+    return num*num;
+});
+/*
+ // ES6 문법
+let numbers = [1, 2, 3, 4, 5];
+let result = numbers.map((num) => {return num*num});
+*/
+```
+
