@@ -379,9 +379,72 @@ export default StateExample;
 - state 를 렌더링 할 때는 { this.state.stateName } 을 사용합니다.
 - state 를 업데이트 할 때는 this.setState() 메소드를 사용합니다. ES6 class에선 auto binding이 되지 않으므로, setState 메소드를 사용 하게 될 메소드를 **bind** 해주어야 합니다. (bind 하지 않으면 React Component 가 가지고있는 멤버 함수 및 객체에 접근 할 수 없습니다.)
 
-##### props 와 state, 생긴건 비슷하지만 용도는 다릅니다. 헷갈리지 않도록 다음 특성을 기억하세요.
+### ※ props 와 state, 생긴건 비슷하지만 용도는 다릅니다. 헷갈리지 않도록 다음 특성을 기억하세요.
 - parent 컴포넌트에 의해 값이 변경 될 수 있는가? 예(props) 아니오(state) 
 - 컴포넌트 내부에서 변경 될 수 있는가? 아니오(props) 예(state) 
+
+### ※ state 안의 array 에 원소 삽입/제거/수정
+this.state 에 포함된 배열에 원소를 삽입/제거/수정 을 할 때 그 배열에 직접 접근하면 안됩니다. <br>
+예를들어, 원소를 추가 할 때 배열객체의 push() 메소드를 사용하면 원하는대로 되지 않습니다. <br>
+this.state가 변경된다고해서 컴포넌트가 업데이트되지 않기 때문입니다.
+물론 변경 후 React 컴포넌트 API 인 forceUpdate()를 통하여 컴포넌트가 render()를 다시 실행 하게 끔 하는 방법이 있긴하지만 이건 절대 권장되지 않는 방법입니다.<br>
+React 메뉴얼 에서도  this.state를 직접 수정하지 말고 this.setState()를 사용하여 수정 할 것을 강조합니다.<br>
+(이 메소드가 실행되면 자동으로 re-rendering 이 진행됩니다.)
+
+#### 삽입 
+state 내부의 배열에 원소를 추가하는 방법은 다음과 같습니다.
+```javascript
+this.setState({
+    list: this.state.list.concat(newObj)
+})
+// concat 을 사용함으로서 현재의 list 배열에 newObj 원소를 추가한 새로운 배열을 생성 한 후, 그 값을 현재의 list 로 설정합니다.
+```
+배열을 수정 할 땐 원시적인 방법으론 위와 같이 배열 전체를 복사하고 처리 후 기존 값에 덮어씌우는 과정을 거쳐야 합니다.<br>
+허나, 만약에 배열의 크기가 클 땐 성능이 좀 저하되겠죠?
+
+다른 방법으로는 Immutability Helpers 를 사용하는 방법이 있습니다.
+이는 배열을 더 효율적으로 수정 할 수 있게 해주는 페이스북의 Immutable-js  를 사용합니다.
+
+#### Immutability Helpers
+React 구버전에서는 해당 라이브러리가 내장되어import React from 'react/addons'; 으로 React를 import 하여 React.addons.update() 를 사용 할 수 있었으나, 이제 이 방법은 deprecated 되었습니다.<br>
+아직도 이렇게 사용은 가능 하나, 브라우저 상에서 ‘react-addon-update’ 를 import 하라고 권장하는 오류 메시지가 발생합니다.
+
+라이브러리 설치 방법
+- $ npm install --save react-addons-update 를 통하여 라이브러리를 저장 후,
+js 파일 상단에 import update from 'react-addons-update' 를 삽입해줍니다.
+```javascript
+// 삽입
+this.setState({
+    list: update(
+              this.state.list, 
+              {
+                  $push: [newObj, newObj2]
+              }
+});
+// 삭제
+this.setState({
+    list: update(
+              this.state.list, 
+              {
+                  $splice: [[index, 1]]
+              }
+});
+// 수정
+// 아래 코드는 list 배열의 index 번째 아이템의 field 와 field2 의 값을 변경합니다.
+this.setState({
+    list: update(
+              this.state.list, 
+              {
+                  [index]: {
+                      field: { $set: "value" },
+                      field2: { $set: "value2" }
+                  }
+              }
+});
+
+```
+
+
 
 ## Array.prototype.map
 map() 메소드는 파라미터로 전달 된 함수를 통하여 배열 내의 각 요소를 프로세싱 하여 그 결과로 새로운 배열을 생성합니다
