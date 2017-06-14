@@ -2,6 +2,7 @@ import React from 'react';
 import ContactInfo from './ContactInfo';
 import ContactCreator from './ContactCreator';
 import update from 'react-addons-update';
+import ContactRemover from './ContactRemover';
 
 export default class Contacts extends React.Component {
 
@@ -48,6 +49,19 @@ export default class Contacts extends React.Component {
     }
   }
 
+  _removeContact(){
+    if(this.state.selectedKey == -1){
+      console.log('contact not selected');
+      return;
+    }
+    this.setState({
+      contactData : update(this.state.contactData,{
+        $splice : [[this.state.selectedKey, 1]]
+      }),
+      selectedKey : -1
+    });
+  }
+
 
   render(){
     return(
@@ -65,6 +79,8 @@ export default class Contacts extends React.Component {
           })}
 
           <ContactCreator onInsert={this._insertContact.bind(this)}/>
+
+          <ContactRemover onRemove={this._removeContact.bind(this)}/>
         </ul>
       </div>
     );
