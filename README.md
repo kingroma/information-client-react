@@ -532,3 +532,72 @@ componentWillUnmount(){
     console.log("componentWillUnmount");
 }
 ```
+
+## ref 
+**ref**는 reference 를 의미하며, 이는 DOM 요소에 이름을 달아줍니다.
+HTML 의 id와 사뭇 비슷하지만, id는 일반 DOM 요소에 특정 DOM 메소드만 사용 할 수 있지만,
+ref는 DOM 요소에도 사용하고 컴포넌트에도 사용 할 수 있으며, 해당 컴포넌트가 가지고있는 메소드 및 변수들을 사용 할 수 있다는 점이 큰 차이점 입니다.
+
+### ref가 유용하게 사용되는 경우
+1. 컴포넌트에 의해 렌더 된 DOM 에 직접 어떠한 처리를 해야 할 경우
+2. 큰 프로젝트에 React 컴포넌트를 사용하는 경우 (예: 다른 웹프레임워크와 혼용)
+
+### 적절한 사용예제
+예를들어, input  과 버튼이 있고,버튼을 누르면 input 을 초기화 하고 focus 를 해야 할 때는, ref 를 사용 해야만 합니다.
+```javascript
+class Hello extends React.Component {
+    handleClick() {
+    	  this.input.value = "";
+          this.input.focus();
+    } 
+    
+    render() {
+  	return (
+    	    <div> 
+      	        <input ref={ref=> this.input = ref}/>
+                <button onClick={this.handleClick.bind(this)}>Click Me</button>
+            </div>
+        );        
+  }
+}
+ReactDOM.render(
+  <Hello/>,
+  document.getElementById('app')
+);
+```
+
+## 함수형 컴포넌트(Functional Component)
+만약에 여러분이 만들 컴포넌트가 라이프사이클 API 도 사용하지 않고, state 도 사용하지 않고, 그냥 props 만 전달해주면 뷰를 렌더링만 해주는 역할이라면 함수형 컴포넌트 형식으로 컴포넌트를 정의  하는게 더 간편하다
+
+Redux 를 사용하여 컴포넌트들을 구성 할 때, Container 컴포넌트 (혹은 Smart, 컴포넌트) 는 클래스형 컴포넌트를 사용하고, Presentational 컴포넌트 (혹은, Dumb 컴포넌트) 는 함수형 컴포넌트를 사용합니다.
+
+함수형 컴포넌트를 사용 할 때 첫 마운팅 속도에 있어서는 클래스방식보다 7% ~ 11% 빠릅니다.
+```javascript
+import React from 'react';
+function Hello(props) {
+    return (
+        <div>Hello {props.name}</div>
+    );
+}
+export default Hello;
+
+// arrow function use
+import React from 'react';
+
+const Hello = (props) => {
+    return (
+        <div>Hello {props.name}</div>
+    );
+}
+
+// 비 구조화 할당문법(Object Destructuring)
+import React from 'react';
+
+const Hello = ({name}) => {
+    return (
+        <div>Hello {name}</div>
+    );
+}
+
+export default Hello;
+```
