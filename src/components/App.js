@@ -5,6 +5,7 @@ import RandomNumber from './RandomNumber';
 import Contacts from './Contacts';
 
 import LoginView from '../view/LoginView'
+import HomeView from '../view/HomeView'
 
 // 컴포넌트의 첫 문자를 대문자로 하는건 React의 naming convention 입니다.
 class App extends React.Component {  
@@ -25,7 +26,8 @@ class App extends React.Component {
         return  (
             <div>
                 
-                <LoginView/>
+                {/* <LoginView/> */}
+                <HomeView/>
             </div>
         )   
     }

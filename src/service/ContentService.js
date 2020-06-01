@@ -13,7 +13,7 @@ class ContentService {
             .then( data => {
                 if ( ObjectUtil.isNotNull(data)  ){
                     if (data.resultCode = "200" && ObjectUtil.isNotNull(data.result)){
-
+                        resolve ( data )
                     } 
                 } else { 
 

@@ -34,6 +34,7 @@ class LoginView extends Component {
         })
     }
 
+    // <button onClick={this.getContentAll.bind(this)} >getConentAll</button> 
     getContentAll(){
         this.contentService.getContentAll()
     }
@@ -41,21 +42,40 @@ class LoginView extends Component {
     render() { 
         return (
             <div style={body}>
-                <input type="text" name="username" onChange={this.inputChange.bind(this)}/>
-                <input type="password" name="password" onChange={this.inputChange.bind(this)}/>
-                <button onClick={this.login.bind(this)}>Login</button>
+                <div style={header}>
+                    NAME
+                </div>
+                <div style={inputArea}>
+                    <input type="text" name="username" onChange={this.inputChange.bind(this)}/> 
+                </div>
+                <div style={inputArea}>
+                    <input type="password" name="password" onChange={this.inputChange.bind(this)}/>
+                </div>
+
+                <div>
+                    <button onClick={this.login.bind(this)}>Login</button>
+                </div>
                 <div></div>
-                <button onClick={this.getContentAll.bind(this)} >getConentAll</button>
+                
             </div>
         ); 
     }
 }
 
 const body = {
-    color: "white",
-    backgroundColor: "DodgerBlue",
-    padding: "10px",
-    fontFamily: "Arial"
+    backgroundColor: "white",
+    width: "100%",
+    height: "100%" ,
+    padding: "0px",
+    textAlign: 'center',
 }
 
+const header = {
+    marginTop: '10%',
+    marginBottom: '10%',
+}
+
+const inputArea = {
+    margin: '3%'
+}
 export default LoginView;
