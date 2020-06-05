@@ -7,6 +7,7 @@ class ContentListView extends Component {
         super(props)
     }
 
+    
     render(){
         var data = this.props.data ;
         var list = data.result ; 

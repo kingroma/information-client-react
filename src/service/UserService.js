@@ -2,7 +2,6 @@ import RequestUtil from '../util/RequestUtil'
 import ObjectUtil from '../util/ObjectUtil'
 import GlobalValue from '../util/GlobalValue'
 
-
 class UserService {
     constructor(){
 

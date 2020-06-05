@@ -21,14 +21,11 @@ class HomeView extends Component {
 
     componentDidMount() {
         console.log('home is render finish');
-
         this.userService.login('kingroma','4235').then(data => {
             this.contentService.getContentAll().then(data => {
-                // var contents = new ContentListModel(data) 
                 
-                
-                this.setState(  {
-                    body : <ContentListView data={data}/>
+                this.setState({
+                    body : <ContentListView data={data} />
                 })
                                 
             })

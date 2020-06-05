@@ -6,7 +6,8 @@ const  values = {
 
         API_BASE_URL: 'http://127.0.0.1:8080/api',
         LOGIN_URL: '/user/login' , 
-        CONTENT_LIST_URL: '/content/listAll'
+        CONTENT_LIST_URL: '/content/listAll',
+        PROGRAM_URL: '/program/information'
         }
 
 class GlobalValue {
