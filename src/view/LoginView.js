@@ -28,6 +28,7 @@ class LoginView extends Component {
         this.userService.login(username,password)
         .then(data => {
             console.log(data)
+            this.props.loginViewOff();
         })
         .catch(message => {
            console.error(message) 
@@ -41,22 +42,23 @@ class LoginView extends Component {
 
     render() { 
         return (
-            <div style={body}>
-                <div style={header}>
-                    NAME
-                </div>
-                <div style={inputArea}>
-                    <input type="text" name="username" onChange={this.inputChange.bind(this)}/> 
-                </div>
-                <div style={inputArea}>
-                    <input type="password" name="password" onChange={this.inputChange.bind(this)}/>
-                </div>
+            <div style={{display:this.props.display}}  >
+                <div style={body}>
+                    <div style={header}>
+                        NAME
+                    </div>
+                    <div style={inputArea}>
+                        <input type="text" name="username" onChange={this.inputChange.bind(this)}/> 
+                    </div>
+                    <div style={inputArea}>
+                        <input type="password" name="password" onChange={this.inputChange.bind(this)}/>
+                    </div>
 
-                <div>
-                    <button onClick={this.login.bind(this)}>Login</button>
+                    <div>
+                        <button onClick={this.login.bind(this)}>Login</button>
+                    </div>
+                    <div></div>
                 </div>
-                <div></div>
-                
             </div>
         ); 
     }
@@ -64,10 +66,15 @@ class LoginView extends Component {
 
 const body = {
     backgroundColor: "white",
-    width: "100%",
-    height: "100%" ,
+    marginTop:"15%",
+    marginLeft:"15%",
+    width: "70%",
+    height: "70%" ,
     padding: "0px",
     textAlign: 'center',
+    position: 'fixed',
+    backgroundColor: '#e2e2e2',
+    zIndex: 99
 }
 
 const header = {

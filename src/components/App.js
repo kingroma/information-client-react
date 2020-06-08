@@ -6,7 +6,8 @@ import Contacts from './Contacts';
 
 import LoginView from '../view/LoginView'
 import HomeView from '../view/HomeView'
-import MusicView from'../view/MusicView'
+import MusicView from '../view/MusicView'
+import MainView from '../view/MainView'
 
 class App extends React.Component {  
     constructor(props) {
@@ -24,11 +25,11 @@ class App extends React.Component {
     
     render(){      
         return  (
-            <div>
-                
+            <div style={{width:'100%',height:'100%'}}>
+                <MainView></MainView>
                 {/* <LoginView/> */}
                 {/* <HomeView/> */}
-                <MusicView/>
+                {/* <MusicView/> */}
             </div>
         )   
     }
