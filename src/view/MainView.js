@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import LoginView from './LoginView';
 import GlobalValue from '../util/GlobalValue';
 import ObjectUtil from '../util/ObjectUtil';
+import TabView from './TabView';
 
 class MainView extends Component {
     constructor(props){
@@ -14,7 +15,7 @@ class MainView extends Component {
         } 
 
         this.state = {
-            loginViewDisplay:loginViewDisplay,
+            loginViewDisplay:loginViewDisplay
         }
     }
 
@@ -44,7 +45,10 @@ class MainView extends Component {
                     loginViewOff={this.loginViewOff.bind(this)}
                     loginViewOn={this.loginViewOn.bind(this)}
                     />
-                <div></div>
+                <div>
+                    <TabView/>
+
+                </div>
             </div>
         )
     }

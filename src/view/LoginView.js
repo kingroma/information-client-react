@@ -4,7 +4,7 @@ import ContentService from '../service/ContentService';
 
 class LoginView extends Component { 
     constructor(props) { 
-        super(props);
+        super(props)
 
         this.state = {
             username : '' ,
@@ -28,10 +28,11 @@ class LoginView extends Component {
         this.userService.login(username,password)
         .then(data => {
             console.log(data)
-            this.props.loginViewOff();
+            alert('Sucess')
         })
         .catch(message => {
-           console.error(message) 
+            console.error(message) 
+            alert('Error '  + message )
         })
     }
 
@@ -73,7 +74,8 @@ const body = {
     padding: "0px",
     textAlign: 'center',
     position: 'fixed',
-    backgroundColor: '#e2e2e2',
+    borderRadius: '5em',
+    backgroundColor: '#efefef',
     zIndex: 99
 }
 

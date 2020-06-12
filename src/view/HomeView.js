@@ -5,6 +5,7 @@ import ContentService from '../service/ContentService';
 
 import ContentListView from './ContentListView'
 import ContentView from './ContentView'
+import ObjectUtil from '../util/ObjectUtil';
 
 class HomeView extends Component { 
     constructor(props) { 
@@ -20,20 +21,24 @@ class HomeView extends Component {
     }
 
     componentDidMount() {
-        console.log('home is render finish');
+        console.log('home is render finish')
+        
         this.userService.login('kingroma','4235').then(data => {
             this.contentService.getContentAll().then(data => {
                 
-                this.setState({
-                    body : <ContentListView data={data} />
-                })
-                                
+                if ( ObjectUtil.isNotNull ( data ) ){
+                    this.setState({
+                        body : <ContentListView data={data} />
+                    })
+                }else { 
+                    console.error ( 'Home View > data is empty or null ' + data )
+                }
             })
         })
     }
 
     render() { 
-        console.log ( 'home is opened')
+        console.log ( 'home is opened' )
         
         return (
             <div>

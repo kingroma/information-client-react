@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import ContentProgramView from './ContentProgramView'
+import ObjectUtil from '../util/ObjectUtil';
 
 class ContentView extends Component { 
     constructor(props){
@@ -13,15 +14,21 @@ class ContentView extends Component {
 
     render(){
         let content = this.props.data
-        this.contentId = content.contentId 
-        this.contentName = content.contentName 
-        this.detailId = 'detail_' + this.contentId 
+        var output = '';
+        if ( ObjectUtil.isNotNull(content) ){
+            this.contentId = content.contentId 
+            this.contentName = content.contentName 
+            this.detailId = 'detail_' + this.contentId 
+            
+            let list = content.list
+            
+            output = list.map(
+                ( content , i ) => (<ContentProgramView key={i} data={content} detailId={this.detailId} />)
+            )
+        } else { 
+            console.error ( 'Contnent View > data is empty or null ' + data )
+        }
         
-        let list = content.list
-        
-        const output = list.map(
-            ( content , i ) => (<ContentProgramView key={i} data={content} detailId={this.detailId} />)
-        )
 
         return (
             <div>

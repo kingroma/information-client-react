@@ -36,7 +36,9 @@ class ContentProgramView extends Component {
         }
         
     }
-
+    onPlay(){
+        console.log('onPlay')
+    }
     getProgramDetailHtml(data){
         
         var output = '' 
