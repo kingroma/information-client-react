@@ -25,11 +25,37 @@ class ProgramService {
                             reject('resultMessage : '+ data.resultMessage);
                         }
                     }else {
-                        reject("login fail")
+                        reject("GET PROGRAM INFORMATION fail")
                     }
                 })
             } else {
                 reject('programId is empty')
+            }
+        });
+    }
+
+    searchProgram(text){
+        return new Promise((resolve,reject)=>{
+            console.log ("SEARCH PROGRAM : " + text)
+
+            if( ObjectUtil.isNotNull(text) ){
+                RequestUtil.GET(
+                    GlobalValue.getValue("PROGRAM_SEARCH_URL") + '/' + text ,
+                    {'token':GlobalValue.getToken()}
+                ).then( data => {
+                    if ( ObjectUtil.isNotNull(data)  ){
+                        console.log (data)
+                        if (data.resultCode = "200" && data.result != null && data.result != undefined){
+                            resolve(data.result)
+                        }else {
+                            reject('resultMessage : '+ data.resultMessage);
+                        }
+                    }else {
+                        reject("SEARCH PROGRAM fail")
+                    }
+                })
+            } else {
+                reject('text is empty')
             }
         });
     }

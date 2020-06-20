@@ -16,7 +16,8 @@
     "react": "^15.5.4",
     "react-addons-update": "^15.5.2",
     "react-dom": "^15.5.4",
-    "react-router": "^5.2.0"
+    "react-router": "^5.2.0",
+    "video-react": "^0.14.1"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",
